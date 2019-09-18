@@ -1,0 +1,6 @@
+模块划分：
+baseResource：共有的res资源，如：drawable，shape，color，dimen，layout 等等。
+baseLibrary：log日志，上报，基础工具库，
+base分功能的其他具体基础组件：
+    1：多线程
+    2：。。。。共用

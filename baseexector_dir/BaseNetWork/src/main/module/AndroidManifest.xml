@@ -1,17 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="liyiwei.customlibrary">
+    package="hongyi.basenetwork">
     <application
-        android:name="com.liyiwei.customlibrary.CustomBaseApplication"
+        android:name="com.liyiwei.basenetwork.BaseNetWorkApplication"
         android:allowBackup="true"
         android:supportsRtl="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/customlibrary_app_name"
+        android:label="@string/basenetwork_app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.liyiwei.customlibrary.CustomBaseActivity">
+        <activity android:name="com.liyiwei.basenetwork.BaseNetWorkActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -42,10 +42,25 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     if (!rootProject.ext.isCustomLibraryApplication) {
         implementation project(':customlibrary')//自定义模块(内含第三方库模块)
-    }else {
-        api project(':baseresource')
-        api project(':baselibrary')
     }
+    if (!rootProject.ext.isBaseMVPmodeApplication) {
+        implementation project(':basemvpmode')//mvp模块
+    }
+    if (!rootProject.ext.isBaseNetWorkApplication) {
+        implementation project(':basenetwork')//网络模块
+    }
+    if (!rootProject.ext.isBaseRouteApplication) {
+        implementation project(':baseroute')//路由模块
+    }
+    if (!rootProject.ext.isThirdLibApplication) {
+        implementation project(':thirdlibrary')//第三方库模块
+    }
+    if (!rootProject.ext.isLiveDataApplication) {
+        implementation project(':livedatabus')//livedatabus模块
+    }
+
+    api project(':baseresource')
+    api project(':baselibrary')
 
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

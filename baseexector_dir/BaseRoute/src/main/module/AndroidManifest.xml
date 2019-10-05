@@ -1,17 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="liyiwei.customlibrary">
+    package="hongyi.baseroute">
     <application
-        android:name="com.liyiwei.customlibrary.CustomBaseApplication"
+        android:name="com.liyiwei.baseroute.BaseRouteApplication"
         android:allowBackup="true"
         android:supportsRtl="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/customlibrary_app_name"
+        android:label="@string/baseroute_app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.liyiwei.customlibrary.CustomBaseActivity">
+        <activity android:name="com.liyiwei.baseroute.BaseRouteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,4 +1,4 @@
-include ':app', ':baseroute', ':basemvpmode',
+include ':app', ':baseroute', ':basemvpmode', ':livedatabus',
         ':baseresource',
         ':baselibrary',
         ':customlibrary',
@@ -14,6 +14,7 @@ project(':thirdlibrary').projectDir = new File('baseexector_dir/ThirdLibrary')  
 project(':basenetwork').projectDir = new File('baseexector_dir/BaseNetWork')    //网络请求封装
 project(':baseroute').projectDir = new File('baseexector_dir/BaseRoute')        //基础路由封装
 project(':basemvpmode').projectDir = new File('baseexector_dir/BaseMVPmode')    //MVP开发模式样板
+project(':livedatabus').projectDir = new File('baseexector_dir/LiveDataBus')    //LiveDataBus模块
 //多协助基础能力module----sdk对外功能
 
 //模块功能点抽离

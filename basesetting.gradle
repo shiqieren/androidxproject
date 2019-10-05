@@ -2,11 +2,12 @@
 ext {
 
 //    isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
-      isCustomLibraryApplication = false  //自定义模块开关，false:作为Lib组件存在， true:作为application存在
-//    isThirdLibraryApplication = false  //我的中心模块，false:作为Lib组件存在， true:作为application存在
-
-
-
+    isCustomLibraryApplication = true  //自定义模块开关，false:作为Lib组件存在， true:作为application存在
+    isBaseMVPmodeApplication = true  //mvp模块，false:作为Lib组件存在， true:作为application存在
+    isBaseNetWorkApplication = true  //网络模块，false:作为Lib组件存在， true:作为application存在
+    isBaseRouteApplication = true  //路由模块，false:作为Lib组件存在， true:作为application存在
+    isThirdLibApplication = false  //第三方模块，false:作为Lib组件存在， true:作为application存在
+    isLiveDataApplication = true  //LiveDatabus模块，false:作为Lib组件存在， true:作为application存在
     android = [
                compileSdkVersion       : 28,
                buildToolsVersion       : "28.0.3",
@@ -39,7 +40,7 @@ ext {
                 "cardview-v7"              : "com.android.support:cardview-v7:${version["androidSupportSdkVersion"]}",
                 "annotations"              : "com.android.support:support-annotations:${version["androidSupportSdkVersion"]}",
                 "recyclerview-v7"          : "com.android.support:recyclerview-v7:${version["androidSupportSdkVersion"]}",
-                "constraint-layout"        : "com.android.support.constraint:constraint-layout:${version["constraintVersion"]}",
+                "constraint-layout"        :   "com.android.support.constraint:constraint-layout:${version["constraintVersion"]}",
                 "percent"                  : "com.android.support:percent:${version["androidSupportSdkVersion"]}",//百分比布局库
                 "dynamic"                  : "com.android.support:support-dynamic-animation:${version["androidSupportSdkVersion"]}",//动态库
                 "multidex"                 : "com.android.support:multidex:1.0.2",//Dex文件突破65536方法数量时

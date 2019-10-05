@@ -1,5 +1,5 @@
 //控制组件模式和集成模式
-if (rootProject.ext.isCustomLibraryApplication) {
+if (rootProject.ext.isLiveDataApplication) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         multiDexEnabled true
 //        resourcePrefix "customlibrary_"   //资源前缀
-        if (rootProject.ext.isCustomLibraryApplication){
+        if (rootProject.ext.isLiveDataApplication){
             //组件模式下设置applicationId
             applicationId "com.liyiwei.customlibrary"
         }
@@ -33,7 +33,7 @@ android {
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             buildConfigField "boolean", "USE_CANARY", "true"
-            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isCustomLibraryApplication}"
+            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isLiveDataApplication}"
             minifyEnabled false
             //Zipalign优化
             zipAlignEnabled true
@@ -45,7 +45,7 @@ android {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
             buildConfigField "boolean", "USE_CANARY", "false"
-            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isCustomLibraryApplication}"
+            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isLiveDataApplication}"
             minifyEnabled true
             //Zipalign优化
             zipAlignEnabled true
@@ -63,7 +63,7 @@ android {
 
     sourceSets {
         main {
-            if (rootProject.ext.isCustomLibraryApplication) {
+            if (rootProject.ext.isLiveDataApplication) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -79,16 +79,22 @@ android {
         abortOnError false
     }
     //启用databinding
-//    dataBinding {
-//        enabled = true
-//    }
+    dataBinding {
+        enabled = true
+    }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation project(':baseresource')
     implementation project(':baselibrary')
-//    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    implementation project(':thirdlibrary')
+
+    implementation 'com.jeremyliao:live-event-bus-x:1.5.2'
+    //For Lifecycles, LiveData, and ViewModel
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "android.arch.lifecycle:livedata:1.1.1"
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    //    annotationProcessor rootProject.ext.dependencies["router-compiler"]
 }

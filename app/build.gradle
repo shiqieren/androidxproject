@@ -4,7 +4,7 @@ android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        applicationId "hongyi.siptea"
+        applicationId "liyiwei.baseapk"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -57,6 +57,9 @@ dependencies {
     }
     if (!rootProject.ext.isLiveDataApplication) {
         implementation project(':livedatabus')//livedatabus模块
+    }
+    if (!rootProject.ext.isBaseAppCrashmodeApplication) {
+        implementation project(':appcrash')//crash模块
     }
 
     api project(':baseresource')

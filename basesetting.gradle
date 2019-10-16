@@ -8,6 +8,8 @@ ext {
     isBaseRouteApplication = true  //路由模块，false:作为Lib组件存在， true:作为application存在
     isThirdLibApplication = false  //第三方模块，false:作为Lib组件存在， true:作为application存在
     isLiveDataApplication = true  //LiveDatabus模块，false:作为Lib组件存在， true:作为application存在
+    isBaseAppCrashmodeApplication = true //crash模块
+    isAsynCallbackApplication = true //异步回调模块
     android = [
                compileSdkVersion       : 28,
                buildToolsVersion       : "28.0.3",
@@ -108,6 +110,7 @@ ext {
             "rxandroid2"               : "io.reactivex.rxjava2:rxandroid:2.1.0",
             "rxjava2"                  : "io.reactivex.rxjava2:rxjava:2.2.3",
             "rxrelay"                  : "com.jakewharton.rxrelay2:rxrelay:2.0.0",
+            //使用rxjava防止内存溢出
             "rxlifecycle2"             : "com.trello.rxlifecycle2:rxlifecycle:${version["rxlifecycle2SdkVersion"]}",
             "rxlifecycle2-android"     : "com.trello.rxlifecycle2:rxlifecycle-android:${version["rxlifecycle2SdkVersion"]}",
             "rxlifecycle2-components"  : "com.trello.rxlifecycle2:rxlifecycle-components:${version["rxlifecycle2SdkVersion"]}",//内存泄漏

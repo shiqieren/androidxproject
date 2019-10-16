@@ -1,0 +1,25 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="hongyi.basemvpmode">
+    <application
+        android:name="com.liyiwei.appcrash.BaseAppCrashApplication"
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/basecrash_app_name"
+        android:theme="@style/AppTheme"
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name="com.liyiwei.appcrash.BaseAppCrashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.liyiwei.appcrash.SecondAct" />
+        <activity android:name="com.liyiwei.appcrash.LifecycleExceptionActivity" />
+        <activity android:name="com.liyiwei.baselibrary.crash.support.DebugSafeModeTipActivity" />
+    </application>
+</manifest>
+

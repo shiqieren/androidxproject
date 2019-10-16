@@ -1,0 +1,22 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="hongyi.asyncallback">
+    <application
+        android:name="com.liyiwei.asyncallback.AsynCallbackApplication"
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/asynmode_app_name"
+        android:theme="@style/AppTheme"
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name="com.liyiwei.asyncallback.AsynCallbackActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+

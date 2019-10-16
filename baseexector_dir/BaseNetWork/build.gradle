@@ -97,7 +97,8 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit-adapter-rxjava"]
 
     //okhttp
-    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+    implementation rootProject.ext.dependencies["logging-interceptor"]//日志拦截
+    implementation rootProject.ext.dependencies["okhttp3"]
 //    annotationProcessor rootProject.ext.dependencies["router-compiler"]
 
     testImplementation rootProject.ext.dependencies["junit"]

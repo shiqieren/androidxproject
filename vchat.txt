@@ -1,0 +1,54 @@
+final class Liyiwei{
+    //客户端创建头像空白文件(com.sie.mp.filemgr.file.addBlankClientFileForAvatar.biz)
+    static final String ADD_BLANK_AVATAR = "v1/app/file/blank/client/file/add/for/avatar";
+    //客户端创建多个空白文件(com.sie.mp.filemgr.file.addMultiBlankClientFiles.biz)
+    static final String ADD_MULTIBLANK_FILES = "v1/app/file/multi/blank/client/files/add";
+    //文件上传完成(com.sie.mp.filemgr.mobile.fileUploadCompleted.biz)
+    static final String UPLOAD_FILE_COMPLETED = "v1/app/file/file/upload/completed";
+    //获取待上传的文件块(com.sie.mp.filemgr.mobile.getPendingBlocks.biz)
+    static final String GET_BLOCKS_PENDING = "v1/app/file/pending/blocks/get";
+    //上传单张图片(com.sie.mp.filemgr.mobile.uploadBase64File.biz)
+    static final String UPLOAD_BASE_FILE = "v1/app/file/base64/file/upload";
+    //上传视频封面图片(com.sie.mp.filemgr.mobile.uploadVideoCoverB64.biz)
+    static final String UPLOAD_VIDEO_COVERFILE = "v1/app/file/video/cover/b64/upload";
+
+    //查询已读会话(com.sie.mp.chatmsg.conversation.queryReadedConversation.biz)
+    static final String QUERY_CONVERSATION_READED = "v1/app/chat/conversation/readed/my/query";
+    //根据天数同步单聊和群聊聊天信息(com.sie.mp.chatmsg.his.userQueryHisMessageByPage.biz)
+    static final String QUERY_BYPAGE_CHATHIS = "v1/app/chat/his/queryByPage";
+
+
+}
+
+//客户端创建头像空白文件
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.ADD_BLANK_AVATAR)
+Flowable<Response<String>> addBlankAvatar(@Field("clientFile") String clientFile, @Field("userCode") String userCode);
+//客户端创建多个空白文件
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.ADD_MULTIBLANK_FILES)
+Flowable<Response<String>> addMultiblankFiles(@Field("clientFile") String clientFile);
+//文件上传完成
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.UPLOAD_FILE_COMPLETED)
+Flowable<Response<String>> uploadFileCompleted(@Field("fileId") String fileId);
+//获取待上传的文件块
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.GET_BLOCKS_PENDING)
+Flowable<Response<String>> getBlocksPending(@Field("fileId") String fileId);
+//上传单张图片
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.UPLOAD_BASE_FILE)
+Flowable<Response<String>> uploadBaseFile(@Field("content") String content, @Field("fileId") String fileId);
+//上传视频封面图片
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.UPLOAD_VIDEO_COVERFILE)
+Flowable<Response<String>> UploadVideoCoverFile(@Field("content") String content, @Field("fileId") String fileId);
+//查询已读会话
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.QUERY_CONVERSATION_READED)
+Flowable<Response<String>> queryConverSationReaded(@Field("updateTimeMills") String updateTimeMills);
+//根据天数同步单聊和群聊聊天信息
+@FormUrlEncoded
+@POST(ApiV1.Liyiwei.QUERY_BYPAGE_CHATHIS)
+Flowable<Response<String>> queryByPageChatHis(@Field("chatId") String chatId, @Field("days") String days, @Field("isFirst") String isFirst);

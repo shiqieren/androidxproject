@@ -32,7 +32,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
+//https://blog.csdn.net/jason_996/article/details/78659019
 public class ChatInterceptor implements Interceptor, Constant {
     @Override
     public Response intercept(Chain chain) throws IOException {

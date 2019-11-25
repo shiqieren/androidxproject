@@ -1,39 +1,24 @@
-//控制组件模式和集成模式
-if (rootProject.ext.isBaseNetWorkApplication) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.library'
+
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
-
 
     defaultConfig {
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         multiDexEnabled true
-//        resourcePrefix "basemvpmode_"   //资源前缀
-        if (rootProject.ext.isBaseNetWorkApplication){
-            //组件模式下设置applicationId
-            applicationId "com.liyiwei.customlibrary"
-        }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-                includeCompileClasspath true
-            }
-        }
+//        resourcePrefix "public_"   //资源前缀
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
     }
 
     buildTypes {
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             buildConfigField "boolean", "USE_CANARY", "true"
-            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isBaseNetWorkApplication}"
+
             minifyEnabled false
             //Zipalign优化
             zipAlignEnabled true
@@ -45,7 +30,7 @@ android {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
             buildConfigField "boolean", "USE_CANARY", "false"
-            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isBaseNetWorkApplication}"
+
             minifyEnabled true
             //Zipalign优化
             zipAlignEnabled true
@@ -54,34 +39,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     //jdk1.8
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    sourceSets {
-        main {
-            if (rootProject.ext.isBaseNetWorkApplication) {
-                manifest.srcFile 'src/main/module/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            }
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-
-
     lintOptions {
         disable 'InvalidPackage'
         disable "ResourceType"
         abortOnError false
     }
-    //启用databinding
-//    dataBinding {
-//        enabled = true
-//    }
 
 }
 
@@ -89,17 +57,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':baseresource')
     implementation project(':baselibrary')
-
-    /*retrofit*/
-    implementation rootProject.ext.dependencies["retrofit"]
-    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
-    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava"]
-
-    //okhttp
-    implementation rootProject.ext.dependencies["logging-interceptor"]//日志拦截
-    implementation rootProject.ext.dependencies["okhttp3"]
-//    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    api rootProject.ext.dependencies["butterknife"]
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["androideventbus"]
+    implementation 'me.weishu:free_reflection:1.2.0'
 
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["runnerX"]

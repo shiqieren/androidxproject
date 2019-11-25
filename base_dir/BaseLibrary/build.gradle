@@ -58,7 +58,6 @@ dependencies {
     api rootProject.ext.dependencies["appcompat_X"]
     api rootProject.ext.dependencies["constraint-layout_X"]
     api rootProject.ext.dependencies["design_X"]
-
     implementation 'me.weishu:free_reflection:1.2.0'
 
     testImplementation rootProject.ext.dependencies["junit"]

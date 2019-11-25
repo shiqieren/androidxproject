@@ -1,4 +1,4 @@
-include ':app', ':baseroute', ':basemvpmode', ':livedatabus', ':appcrash', ':AsynCallback',
+include ':app', ':baseroute', ':basemvpmode', ':livedatabus', ':appcrash', ':AsynCallback', ':basethirdlib',
         ':baseresource',
         ':baselibrary',
         ':customlibrary',
@@ -8,7 +8,13 @@ include ':app', ':baseroute', ':basemvpmode', ':livedatabus', ':appcrash', ':Asy
 //通用全局基础module
 project(':baseresource').projectDir = new File('base_dir/BaseResource')         //全局资源库
 project(':baselibrary').projectDir = new File('base_dir/BaseLibrary')           //全局基础类工具库
-project(':appcrash').projectDir = new File('base_dir/appcrash')           //全局异常处理
+
+
+//通用全局基础lib_module
+project(':basethirdlib').projectDir = new File('baselib_dir/basethirdlib')           //全局基础库
+project(':appcrash').projectDir = new File('baselib_dir/appcrash')           //全局异常处理
+
+
 //功能点执行基础module----单一作用
 project(':customlibrary').projectDir = new File('baseexector_dir/CustomLibrary') //自定义库
 project(':thirdlibrary').projectDir = new File('baseexector_dir/ThirdLibrary')  //第三方库

@@ -13,9 +13,9 @@ ext {
     android = [
                compileSdkVersion       : 28,
                buildToolsVersion       : "28.0.3",
-               minSdkVersion           : 16 ,
+               minSdkVersion           : 19,
                targetSdkVersion        : 28,
-               versionCode             : 1,
+               versionCode             : 1000,
                versionName             : "1.0.0"    //必须是int或者float，否则影响线上升级
     ]
 
@@ -25,7 +25,7 @@ ext {
                glideSdkVersion         : "4.8.0",
                canarySdkVersion        : "1.5.4",
                constraintVersion       : "1.0.2",
-               okhttp                  : "3.8.1",
+               okhttp                  : "3.12.0",
 //               dagger2SdkVersion       : "2.19",
                butterknifeSdkVersion   : "8.8.1",
                rxlifecycleSdkVersion   : "1.0",

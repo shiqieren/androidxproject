@@ -90,14 +90,6 @@ dependencies {
     implementation project(':baseresource')
     implementation project(':baselibrary')
 //    annotationProcessor rootProject.ext.dependencies["router-compiler"]
-//20201230-替换rxjava3 ，不再支持
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.x.x'
-
-    //防止内存泄漏
-    implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
 
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["runnerX"]

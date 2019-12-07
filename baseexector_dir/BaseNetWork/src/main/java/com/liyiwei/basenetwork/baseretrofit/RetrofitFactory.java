@@ -59,6 +59,12 @@ public class RetrofitFactory {
         }
 
         OkHttpClient httpClient = httpClientBuilder.build();
+//        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
+//        okHttpClientBuilder.addInterceptor(loggingInterceptor)
+//                           .addInterceptor(new ChatInterceptor())
+//                           .addInterceptor(loggingInterceptor1)
+//                           .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -74,6 +80,7 @@ public class RetrofitFactory {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 
         if (!TextUtils.isEmpty(ApiConfig.getBaseUrl())) {
+            //可配置dev，product，local环境
             build = retrofit.baseUrl(ApiConfig.getBaseUrl()).build();
         }
 

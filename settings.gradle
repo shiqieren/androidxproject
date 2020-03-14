@@ -1,23 +1,17 @@
-include ':app', ':baseroute', ':basemvpmode', ':livedatabus', ':appcrash', ':AsynCallback', ':basethirdlib',
+include ':app', ':baseroute', ':basemvpmode', ':livedatabus', ':moudulexample', ':AsynCallback',
         ':baseresource',
         ':baselibrary',
         ':customlibrary',
-        ':thirdlibrary',
         ':basenetwork'
-
+//---------------------------------第一层--------------------------------//
 //通用全局基础module
 project(':baseresource').projectDir = new File('base_dir/BaseResource')         //全局资源库
 project(':baselibrary').projectDir = new File('base_dir/BaseLibrary')           //全局基础类工具库
 
 
-//通用全局基础lib_module
-project(':basethirdlib').projectDir = new File('baselib_dir/basethirdlib')           //全局基础库
-project(':appcrash').projectDir = new File('baselib_dir/appcrash')           //全局异常处理
-
-
+//---------------------------------第三层--------------------------------//
 //功能点执行基础module----单一作用
 project(':customlibrary').projectDir = new File('baseexector_dir/CustomLibrary') //自定义库
-project(':thirdlibrary').projectDir = new File('baseexector_dir/ThirdLibrary')  //第三方库
 project(':basenetwork').projectDir = new File('baseexector_dir/BaseNetWork')    //网络请求封装
 project(':AsynCallback').projectDir = new File('baseexector_dir/AsynCallback')    //异步回调库
 project(':baseroute').projectDir = new File('baseexector_dir/BaseRoute')        //基础路由封装
@@ -25,4 +19,5 @@ project(':basemvpmode').projectDir = new File('baseexector_dir/BaseMVPmode')    
 project(':livedatabus').projectDir = new File('baseexector_dir/LiveDataBus')    //LiveDataBus模块
 //多协助基础能力module----sdk对外功能
 
+//---------------------------------第四层--------------------------------//
 //模块功能点抽离

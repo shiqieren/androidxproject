@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+//使用greendao
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -12,6 +13,7 @@ android {
         multiDexEnabled true
 //        resourcePrefix "public_"   //资源前缀
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
     buildTypes {
@@ -52,6 +54,13 @@ android {
     }
 
 }
+//greendao配置
+greendao {
+    //版本号，升级时可配置
+    schemaVersion 1
+    daoPackage 'com.xxx.ooo.greendaodemo.greendao'
+    targetGenDir 'src/main/java'
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -59,6 +68,17 @@ dependencies {
     api rootProject.ext.dependencies["constraint-layout_X"]
     api rootProject.ext.dependencies["design_X"]
     implementation 'me.weishu:free_reflection:1.2.0'
+
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["butterknife"]
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["androideventbus"]
+    api rootProject.ext.dependencies["recyclerview-v7_X"]
+
+    implementation 'org.greenrobot:greendao:3.2.2'
+
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide-compiler"]
 
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["runnerX"]

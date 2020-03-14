@@ -89,6 +89,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':baseresource')
     implementation project(':baselibrary')
+//    implementation project(':basethirdlib')
 
     /*retrofit*/
     implementation rootProject.ext.dependencies["retrofit"]

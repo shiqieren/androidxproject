@@ -52,15 +52,12 @@ dependencies {
     if (!rootProject.ext.isBaseRouteApplication) {
         implementation project(':baseroute')//路由模块
     }
-    if (!rootProject.ext.isThirdLibApplication) {
-        implementation project(':thirdlibrary')//第三方库模块
-    }
     if (!rootProject.ext.isLiveDataApplication) {
         implementation project(':livedatabus')//livedatabus模块
     }
-    if (!rootProject.ext.isBaseAppCrashmodeApplication) {
-        implementation project(':appcrash')//crash模块
-    }
+//    if (!rootProject.ext.isBaseAppmodeApplication) {
+//        implementation project(':appcrash')//范例模块
+//    }
 
     api project(':baseresource')
     api project(':baselibrary')

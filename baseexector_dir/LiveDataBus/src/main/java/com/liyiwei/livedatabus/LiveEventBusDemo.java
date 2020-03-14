@@ -22,10 +22,7 @@ import java.util.concurrent.Executors;
 
 import liyiwei.livedatabus.R;
 import liyiwei.livedatabus.databinding.ActivityLiveDataBusDemoBinding;
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+
 
 public class LiveEventBusDemo extends AppCompatActivity {
     private static final String TAG = "LiveEventBusDemo";
@@ -122,52 +119,52 @@ public class LiveEventBusDemo extends AppCompatActivity {
     }
 
     public void sendMsgByPostValue() {
-        Observable.just(new Random())
-                .map(new Func1<Random, String>() {
-                    @Override
-                    public String call(Random random) {
-                        return "Message By PostValue: " + random.nextInt(100);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        LiveEventBus.get(KEY_TEST_OBSERVE).post(s);
-                    }
-                });
+//        Observable.just(new Random())
+//                .map(new Func1<Random, String>() {
+//                    @Override
+//                    public String call(Random random) {
+//                        return "Message By PostValue: " + random.nextInt(100);
+//                    }
+//                })
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Action1<String>() {
+//                    @Override
+//                    public void call(String s) {
+//                        LiveEventBus.get(KEY_TEST_OBSERVE).post(s);
+//                    }
+//                });
     }
 
     public void sendMsgToForeverObserver() {
-        Observable.just(new Random())
-                .map(new Func1<Random, String>() {
-                    @Override
-                    public String call(Random random) {
-                        return "Message To ForeverObserver: " + random.nextInt(100);
-                    }
-                })
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        LiveEventBus.get(KEY_TEST_OBSERVE_FOREVER).post(s);
-                    }
-                });
+//        Observable.just(new Random())
+//                .map(new Func1<Random, String>() {
+//                    @Override
+//                    public String call(Random random) {
+//                        return "Message To ForeverObserver: " + random.nextInt(100);
+//                    }
+//                })
+//                .subscribe(new Action1<String>() {
+//                    @Override
+//                    public void call(String s) {
+//                        LiveEventBus.get(KEY_TEST_OBSERVE_FOREVER).post(s);
+//                    }
+//                });
     }
 
     public void sendMsgToStickyReceiver() {
-        Observable.just(new Random())
-                .map(new Func1<Random, String>() {
-                    @Override
-                    public String call(Random random) {
-                        return "Message Sticky: " + random.nextInt(100);
-                    }
-                })
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        LiveEventBus.get(KEY_TEST_STICKY).post(s);
-                    }
-                });
+//        Observable.just(new Random())
+//                .map(new Func1<Random, String>() {
+//                    @Override
+//                    public String call(Random random) {
+//                        return "Message Sticky: " + random.nextInt(100);
+//                    }
+//                })
+//                .subscribe(new Action1<String>() {
+//                    @Override
+//                    public void call(String s) {
+//                        LiveEventBus.get(KEY_TEST_STICKY).post(s);
+//                    }
+//                });
     }
 
     public void startStickyActivity() {

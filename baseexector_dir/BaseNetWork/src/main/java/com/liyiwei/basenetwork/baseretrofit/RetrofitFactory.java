@@ -5,9 +5,14 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.liyiwei.basenetwork.BaseNetWorkApplication;
 import com.liyiwei.basenetwork.baseretrofit.interceptor.HttpCacheInterceptor;
 import com.liyiwei.basenetwork.baseretrofit.interceptor.HttpHeaderInterceptor;
 import com.liyiwei.basenetwork.baseretrofit.interceptor.HttpLoggerInterceptor;
+import com.liyiwei.basenetwork.baseretrofit.persistentcookiejar.ClearableCookieJar;
+import com.liyiwei.basenetwork.baseretrofit.persistentcookiejar.PersistentCookieJar;
+import com.liyiwei.basenetwork.baseretrofit.persistentcookiejar.cache.SetCookieCache;
+import com.liyiwei.basenetwork.baseretrofit.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.liyiwei.basenetwork.baseretrofit.transform.NullTypeAdapterFactory;
 import com.liyiwei.basenetwork.https.SslSocketFactory;
 import com.liyiwei.basenetwork.https.UnSafeHostnameVerify;
@@ -16,7 +21,9 @@ import com.liyiwei.basenetwork.utils.ApiConfig;
 import com.liyiwei.basenetwork.utils.AppContextUtils;
 
 import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -25,9 +32,11 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 方式1--使用独立service
  * describe：Retrofit+RxJava网络请求封装
  * author ：mp5a5 on 2018/12/28 11：21
  * email：wwb199055@126.com
+ * 配置Retrofit（配置网络缓存cache、配置持久cookie免登录）
  */
 
 @SuppressWarnings("ALL")
@@ -36,19 +45,42 @@ public class RetrofitFactory {
 
     private final Retrofit.Builder retrofit;
     private Retrofit build;
-
+    private final OkHttpClient httpClient;
+    public OkHttpClient getClient() {
+        return httpClient;
+    }
+//*****************拦截配置方法-成员变量法***************************//
+    //Interceptor
+    //    Interceptor REWRITE_HEADER_CONTROL_INTERCEPTOR = chain -> {
+    //        return chain.proceed(null);
+    //    };
+//*****************拦截配置方法-成员变量法***************************//
     private RetrofitFactory() {
+        /*================== common ==================*/
 
-        // 指定缓存路径,缓存大小100Mb
+
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+
+        // cache指定缓存路径,缓存大小100Mb
         File cacheFile = new File(AppContextUtils.getContext().getCacheDir(), "HttpCache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100);
+
+        //cookie
+//        ClearableCookieJar cookieJar =
+//                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(BaseNetWorkApplication.getApplicationContext()));
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient().newBuilder()
                 .readTimeout(ApiConfig.getDefaultTimeout(), TimeUnit.MILLISECONDS)
                 .connectTimeout(ApiConfig.getDefaultTimeout(), TimeUnit.MILLISECONDS)
+                // Log信息拦截器
                 .addInterceptor(HttpLoggerInterceptor.getLoggerInterceptor())
+                //header配置
                 .addInterceptor(new HttpHeaderInterceptor())
+                //拦截配置方法-成员变量法
+//                .addInterceptor(REWRITE_HEADER_CONTROL_INTERCEPTOR)
                 .addNetworkInterceptor(new HttpCacheInterceptor())
+//                .cookieJar(cookieJar)
                 .cache(cache);
 
         if (ApiConfig.getOpenHttps()) {
@@ -56,15 +88,10 @@ public class RetrofitFactory {
                     SslSocketFactory.getSSLSocketFactory(ApiConfig.getSslSocketConfigure().getCertificateInputStream()) :
                     SslSocketFactory.getSSLSocketFactory(), new UnSafeTrustManager());
             httpClientBuilder.hostnameVerifier(new UnSafeHostnameVerify());
+            //                           .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         }
 
-        OkHttpClient httpClient = httpClientBuilder.build();
-//        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
-//        okHttpClientBuilder.addInterceptor(loggingInterceptor)
-//                           .addInterceptor(new ChatInterceptor())
-//                           .addInterceptor(loggingInterceptor1)
-//                           .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
+         httpClient = httpClientBuilder.build();
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")

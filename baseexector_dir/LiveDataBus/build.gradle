@@ -89,7 +89,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':baseresource')
     implementation project(':baselibrary')
-    implementation project(':thirdlibrary')
 
     implementation 'com.jeremyliao:live-event-bus-x:1.5.2'
     //For Lifecycles, LiveData, and ViewModel

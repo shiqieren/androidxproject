@@ -7,6 +7,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.liyiwei.baselibrary.BuildConfig;
 import com.liyiwei.baselibrary.R;
 import com.liyiwei.baselibrary.crash.cockroach.Cockroach;
@@ -16,7 +18,10 @@ import com.liyiwei.baselibrary.crash.support.DebugSafeModeTipActivity;
 import com.liyiwei.baselibrary.crash.support.DebugSafeModeUI;
 
 
-public class BaseAppCrashApplication extends Application {
+/**
+ * 全局异常捕获初始化注册
+ */
+public class BaseAppCrashApplication extends MultiDexApplication {
     private static final String TAG = "BaseAppCrashApplication";
     @Override
     public void onCreate() {

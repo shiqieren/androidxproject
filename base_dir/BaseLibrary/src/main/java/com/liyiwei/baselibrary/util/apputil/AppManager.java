@@ -1,6 +1,9 @@
 package com.liyiwei.baselibrary.util.apputil;
 
 import android.app.Activity;
+import android.content.Context;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 
 import androidx.fragment.app.Fragment;
@@ -25,13 +28,11 @@ public class AppManager {
      *
      * @return AppManager
      */
-    public static AppManager getAppManager() {
-        if (instance == null) {
+    public static synchronized AppManager getInstance() {
+        if(instance == null)
             instance = new AppManager();
-        }
         return instance;
     }
-
     public static Stack<Activity> getActivityStack() {
         return activityStack;
     }
@@ -56,7 +57,16 @@ public class AppManager {
      */
     public void removeActivity(Activity activity) {
         if (activity != null) {
+            activity.finish();
             activityStack.remove(activity);
+        }
+    }
+
+    public void removeActivity(){
+        if(activityStack.size() != 0){
+            Activity ac = activityStack.pop();
+            ac.finish();
+            activityStack.remove(ac);
         }
     }
 
@@ -93,6 +103,7 @@ public class AppManager {
     public void finishActivity(Activity activity) {
         if (activity != null) {
             if (!activity.isFinishing()) {
+                hideSoftKeyBoard(activity);
                 activity.finish();
             }
         }
@@ -114,6 +125,10 @@ public class AppManager {
      * 结束所有Activity
      */
     public void finishAllActivity() {
+
+        if (activityStack.isEmpty()){
+            return;
+        }
         for (int i = 0, size = activityStack.size(); i < size; i++) {
             if (null != activityStack.get(i)) {
                 finishActivity(activityStack.get(i));
@@ -196,6 +211,14 @@ public class AppManager {
         } catch (Exception e) {
             activityStack.clear();
             e.printStackTrace();
+        }
+    }
+
+    public void hideSoftKeyBoard(Activity activity) {
+        View localView = activity.getCurrentFocus();
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (localView != null && imm != null) {
+            imm.hideSoftInputFromWindow(localView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 }

@@ -3,7 +3,8 @@ package com.liyiwei.baselibrary.util.utils;
 import android.os.Process;
 import android.text.TextUtils;
 
-import com.liyiwei.baselibrary.util.apputil.ActivityStack;
+
+import com.liyiwei.baselibrary.util.apputil.AppManager;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class CommonUtils {
 
     //杀死进程
     public static void kill(){
-        ActivityStack.getInstance().clearAllActivity();
+        AppManager.getInstance().finishAllActivity();
         Process.killProcess(Process.myPid());
     }
 }

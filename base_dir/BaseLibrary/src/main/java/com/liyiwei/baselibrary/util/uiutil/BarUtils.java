@@ -17,6 +17,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.liyiwei.baselibrary.util.xutils.Utils;
 
 import java.lang.reflect.Method;
@@ -504,5 +505,15 @@ public final class BarUtils {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
+    }
+
+    public static void increaseViewHeightByStatusBarHeight(Activity activity, View view) {
+        ViewGroup.LayoutParams lp = view.getLayoutParams();
+        if (lp == null) {
+            lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) lp;
+        layoutParams.height += ImmersionBar.getStatusBarHeight(activity);
+        view.setLayoutParams(layoutParams);
     }
 }

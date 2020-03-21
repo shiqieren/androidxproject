@@ -14,6 +14,7 @@ import java.util.Date;
 
 
 /**
+ * 生命周期问题异常
  * Created by wanjian on 2018/5/19.
  */
 

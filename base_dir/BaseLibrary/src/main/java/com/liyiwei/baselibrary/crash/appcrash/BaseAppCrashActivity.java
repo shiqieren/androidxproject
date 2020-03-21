@@ -9,15 +9,19 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.liyiwei.baselibrary.R;
+import com.liyiwei.baselibrary.base.BaseActivity;
 
 
-public class BaseAppCrashActivity extends AppCompatActivity {
+/**
+ * 各类异常出现捕获展示基类
+ */
+public class BaseAppCrashActivity extends BaseActivity {
     private static final String TAG = "BaseMVPmodeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crash_layout);
+//        setContentView(R.layout.activity_crash_layout);
         findViewById(R.id.click).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +132,11 @@ public class BaseAppCrashActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public int getContentView() {
+        return R.layout.activity_crash_layout;
     }
 
 }

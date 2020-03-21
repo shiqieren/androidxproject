@@ -7,15 +7,17 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import com.liyiwei.baselibrary.util.uiutil.LoadingViewUtil;
 import com.liyiwei.baselibrary.util.uiutil.ToastUtils;
 import com.liyiwei.baselibrary.util.utils.NetworkUtils;
 
 public abstract class BaseFragment extends Fragment {
     private Dialog loadingDialog = null;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     public boolean getNetworkStatus(){
-        return NetworkUtils.isNetworkConnected(getActivity());
+        return NetworkUtils.isNetworkConnected(mActivity);
     }
 
     public Context getContext(){
@@ -36,14 +38,17 @@ public abstract class BaseFragment extends Fragment {
      * 显示正在加载的提示
      * @param message
      */
-    public void showLoadingDialog(String message){
-//        loadingDialog = CustomWeiboDialogUtils.createLoadingDialog(getContext(),message);
+    protected void showLoadingView(boolean isCover,boolean isShowLoadBg,String message){
+        LoadingViewUtil.showLoading(mActivity,isCover,isShowLoadBg,message);
     }
-
     /**
      * 关闭正在显示的提示
      */
-    public void closeLoadingDialog(){
-//        CustomWeiboDialogUtils.closeDialog(loadingDialog);
+    protected void hideLoadingView(){
+        LoadingViewUtil.hideLoading(mActivity);
+    }
+
+    protected void isLoading(){
+        LoadingViewUtil.isLoading(mActivity);
     }
 }

@@ -166,6 +166,6 @@ public class ActivityRouter {
     }
 
     public void closeAllActivity(){
-        ActivityStack.getInstance().clearAllActivity();
+        AppManager.getInstance().finishAllActivity();
     }
 }

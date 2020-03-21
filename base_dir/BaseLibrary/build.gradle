@@ -75,10 +75,16 @@ dependencies {
     api rootProject.ext.dependencies["androideventbus"]
     api rootProject.ext.dependencies["recyclerview-v7_X"]
 
+    // 基础依赖包，必须要依赖-沉浸式
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+
     implementation 'org.greenrobot:greendao:3.2.2'
 
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["glide-compiler"]
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
 
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["runnerX"]

@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 
 /**
+ * 绘制抛出的异常
  * Created by wanjian on 2018/5/29.
  */
 

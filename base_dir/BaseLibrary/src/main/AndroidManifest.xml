@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.liyiwei.baselibrary" />
+    package="com.liyiwei.baselibrary" >
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <service
+        android:name=".service.NetworkService"
+        android:permission="android.permission.BIND_JOB_SERVICE" />
+
+    <receiver android:name=".receiver.NetworkBroadCastReceiver" />
+</manifest>

@@ -1,0 +1,49 @@
+downLoadFile(new File(FilePathUtil.getInstance().getTempRootPath()), downloadUrl);
+
+private FileDownloader loader = null;
+
+ private void downLoadFile(final File savedir, final String filePath) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                videoState = 1;
+                final String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
+                if (loader != null) {
+                    loader.cancelDownLoad();
+                }
+                String vToken;
+                try {
+                    vToken = AESUtil.getInstance().encrypt(user.getUserId() + "&" + System.currentTimeMillis() +
+                            "&" + MD5Util.getMD5(fileName).toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    vToken = "";
+                }
+                loader = new FileDownloader(ChattingActivity.this, filePath, savedir, 1, vToken);
+                videoTotalSize = loader.getFileSize();//设置进度条的最大刻度为文件的长度
+                videoProgress.setMaxProgress(videoTotalSize);
+                videoProgress.setProgress(0);//初始化
+                try {
+                    loader.download(new myDownloadProgressListener(videoChatId, videoTotalSize, fileName, filePath));
+                } catch (Exception e) {
+                    Log.e("videoProgress222", "exception");
+                    Message msg = new Message();
+                    msg.what = -1;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fileName", fileName);
+                    msg.setData(bundle);
+                    if (handler != null)
+                        handler.sendMessage(msg);//发送消息
+                    videoState = 0;
+                    loader.cancelDownLoad();
+                }
+            }
+        });
+        thread.start();
+    }
+
+
+
+    if (loader != null) {
+                        loader.cancelDownLoad();
+                    }

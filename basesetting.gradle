@@ -7,7 +7,7 @@ ext {
     isBaseMVPmodeApplication = true  //mvp模块，false:作为Lib组件存在， true:作为application存在
     isBaseNetWorkApplication = true  //网络模块，false:作为Lib组件存在， true:作为application存在
     isBaseRouteApplication = true  //路由模块，false:作为Lib组件存在， true:作为application存在
-    isThirdLibApplication = false  //第三方模块，false:作为Lib组件存在， true:作为application存在
+    isThirdLibApplication = true  //第三方模块，false:作为Lib组件存在， true:作为application存在
     isLiveDataApplication = true  //LiveDatabus模块，false:作为Lib组件存在， true:作为application存在
 
     isAsynCallbackApplication = true //异步回调模块

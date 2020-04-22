@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
-import com.gyf.immersionbar.components.SimpleImmersionProxy;
 import com.liyiwei.baselibrary.base.BaseFragment;
 
 /**
@@ -23,7 +21,7 @@ public abstract class SimpleImmersionFragment extends BaseFragment implements Si
     /**
      * ImmersionBar代理类
      */
-    private com.gyf.immersionbar.components.SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
+    private SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

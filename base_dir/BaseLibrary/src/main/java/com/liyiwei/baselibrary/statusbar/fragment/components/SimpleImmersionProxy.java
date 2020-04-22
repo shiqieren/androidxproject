@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
+
 
 /**
  * Fragment快速实现沉浸式的代理类
@@ -22,7 +22,7 @@ public class SimpleImmersionProxy {
     /**
      * 沉浸式实现接口
      */
-    private com.gyf.immersionbar.components.SimpleImmersionOwner mSimpleImmersionOwner;
+    private SimpleImmersionOwner mSimpleImmersionOwner;
     /**
      * Fragment的view是否已经初始化完成
      */
@@ -30,7 +30,7 @@ public class SimpleImmersionProxy {
 
     public SimpleImmersionProxy(Fragment fragment) {
         this.mFragment = fragment;
-        if (fragment instanceof com.gyf.immersionbar.components.SimpleImmersionOwner) {
+        if (fragment instanceof SimpleImmersionOwner) {
             this.mSimpleImmersionOwner = (SimpleImmersionOwner) fragment;
         } else {
             throw new IllegalArgumentException("Fragment请实现SimpleImmersionOwner接口");

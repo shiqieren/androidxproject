@@ -1,0 +1,68 @@
+protected void uploadFile(String path) {
+        if (!TextUtils.isEmpty(uploadFileUrl) && !TextUtils.isEmpty(path)) {
+            List<String> list = new ArrayList<>();
+            list.add(path);
+            initMap();
+            UIProgressListener uiProgressRequestListener = new UIProgressListener() {
+                @Override
+                public void onUIProgress(long bytesWrite, long contentLength, boolean done) {
+                    int progress = (int) ((100 * bytesWrite) / contentLength);
+                    setRoundProgress(progress);
+                }
+
+                @Override
+                public void onUIStart(long bytesWrite, long contentLength, boolean done) {
+                    super.onUIStart(bytesWrite, contentLength, done);
+                    showRoundProgressDialog();
+                }
+
+                @Override
+                public void onUIFinish(long bytesWrite, long contentLength, boolean done) {
+                    super.onUIFinish(bytesWrite, contentLength, done);
+                    dismissRoundProgressDialog();
+                }
+            };
+
+            OkHttpClientManager.uploadFile(uploadFileUrl, map, list, uiProgressRequestListener, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismissRoundProgressDialog();
+                            Toast.makeText(WebActivity.this, R.string.upload_fail, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    final int code = response.code();
+                    final String str = response.body().string();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                dismissRoundProgressDialog();
+                                if (code == 200) {
+                                    Object obj = new JSONTokener(str).nextValue();
+                                    if (obj instanceof JSONArray) {
+                                        setFormFileUploadHtml(str);
+                                    } else if (obj instanceof JSONObject) {
+                                        JSONObject object = new JSONObject(str);
+                                        JSONArray array = new JSONArray();
+                                        array.put(object);
+                                        setFormFileUploadHtml(array.toString());
+                                    }
+                                    Toast.makeText(WebActivity.this, R.string.upload_success, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(WebActivity.this, R.string.upload_fail, Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            });
+        }

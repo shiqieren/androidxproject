@@ -1,0 +1,243 @@
+//控制组件模式和集成模式
+if (rootProject.ext.isThirdLibApplication) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+apply plugin: 'org.greenrobot.greendao'
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        multiDexEnabled true
+//        resourcePrefix "basemvpmode_"   //资源前缀
+        if (rootProject.ext.isThirdLibApplication){
+            //组件模式下设置applicationId
+            applicationId "com.liyiwei.basethirdlib"
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath true
+            }
+        }
+    }
+
+//    signingConfigs {
+//        debug {
+//            storeFile file("../vivo_it_moblie_release.jks")
+//            storePassword 'vivo_it'
+//            keyAlias 'vivo_it_moblie'
+//            keyPassword 'vivo_it'
+//            v2SigningEnabled false
+//        }
+//
+//        release {
+//            storeFile file("../vivo_it_moblie_release.jks")
+//            storePassword 'vivo_it'
+//            keyAlias 'vivo_it_moblie'
+//            keyPassword 'vivo_it'
+//            v2SigningEnabled false
+//        }
+//
+//    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isThirdLibApplication}"
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+//            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            buildConfigField "boolean", "IS_BUILD_MODULE", "${rootProject.ext.isThirdLibApplication}"
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+//            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //环境
+    flavorDimensions "default"
+    productFlavors {
+        //正式 环境
+        product {
+            manifestPlaceholders = [
+                    GETUI_APP_ID    : "XK85wQDfsq9HVAaik95MG4",
+                    GETUI_APP_KEY   : "mH17yr2LdU7zlp52sPahe3",
+                    GETUI_APP_SECRET: "Z3kDNMCW2m7ywzYeSBHRZ9"
+            ]
+        }
+        //测试环境
+        vivoTest {
+            if (rootProject.ext.isThirdLibApplication){
+                //组件模式下设置applicationId
+                applicationId 'com.vivo.it.college.dev'
+            }
+            manifestPlaceholders = [
+                    GETUI_APP_ID    : "9OLK4KcNRv5DL3ZWyksEP7",
+                    GETUI_APP_KEY   : "NXoOcDM2uN7gGa6StoZZj",
+                    GETUI_APP_SECRET: "KrPKQRUYwy8LlG3ED3YAC2"
+            ]
+        }
+
+        //uat
+        uat {
+            if (rootProject.ext.isThirdLibApplication){
+                //组件模式下设置applicationId
+                applicationId 'com.vivo.it.college.uat'
+            }
+            manifestPlaceholders = [
+                    GETUI_APP_ID    : "joLy3JmcwG6oLDl82xo9aA",
+                    GETUI_APP_KEY   : "tf9N6n1Oa0AsrEvp7gOVv8",
+                    GETUI_APP_SECRET: "vRX2nVvibe6LuN2wRgn0a7"
+            ]
+        }
+    }
+
+
+    //jdk1.8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.isThirdLibApplication) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+//出包名字
+    if (rootProject.ext.isThirdLibApplication) {
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+//            output ->
+//                if (output.outputFile != null && output.outputFile.name.endsWith(".apk")&&'release'.equals(variant.buildType.name)) {
+                def flavorName = variant.flavorName.startsWith("-") ? variant.flavorName.subString(1) : variant.flavorName
+//                    def apkFile = new File(output.outputFile.getParent(), "vcollege_${flavorName}_v${variant.versionName}_buildTime_${buildTime()}.apk")
+                def name=getFlavorName(flavorName)
+                outputFileName = "ThirdLibApp_${name}_v${variant.versionName}_buildTime_${buildTime()}.apk"
+//                }
+            }
+        }
+    }
+
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+    //启用databinding
+//    dataBinding {
+//        enabled = true
+//    }
+
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation":"${project.buildDir}/outputs/schema.txt".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+    }
+
+    defaultConfig {
+        ndk {
+            // 只接入 armeabi-v7a 和 x86 架构
+            abiFilters 'armeabi-v7a', 'x86'
+        }
+    }
+
+}
+
+greendao {
+    schemaVersion 5//数据库版本号
+    daoPackage 'com.liyiwei.basethirdlib.dbgreendao.greendao'//设置DaoMaster、DaoSession、Dao包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    //targetGenDirTest：设置生成单元测试目录
+    //generateTests：设置自动生成单元测试用例
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format("yyyy-MM-dd")
+    return formattedDate
+}
+
+def getFlavorName(flavorName){
+    if(flavorName.startsWith("product")){
+        return "Product"
+    }else if(flavorName.startsWith("uat")){
+        return "UAT"
+    }else{
+        return "Test"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':baseresource')
+    implementation project(':baselibrary')
+//    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+//    数据库
+    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+
+    //ROOM+WCDB
+    implementation 'com.tencent.wcdb:wcdb-android:1.0.0'
+//    implementation 'com.tencent.wcdb:room:1.1.1'
+    // Replace "1.0.8" to any available version.
+
+//    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    def room_version = "2.2.3"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+//    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - RxJava support for Room
+//    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["runnerX"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-coreX"]
+}

@@ -1,0 +1,15 @@
+1:多图上传
+asyncTask = new UploadMulitPicturesAsyncTask(listPic);
+asyncTask.executeOnExecutor(Executors.newFixedThreadPool(9),flag);
+
+2：单图上传
+UploadPicturesAsyncTask tmp = new UploadPicturesAsyncTask(file);
+                tmp.execute(file);
+
+3：分块上传（未完成后台服务续传）---流方式上传
+ public UploadService svr = null;
+ public void addPendingFile(MpFiles f) {
+         if (svr != null) {
+             svr.addPendingFile(f);
+         }
+     }

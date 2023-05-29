@@ -190,8 +190,6 @@ ext {
             "agentweb:download"          : 'com.just.agentweb:download:4.0.3-beta', // (可选)
             "Justson:Downloader"         : 'com.github.Justson:Downloader:v4.0.3',// (可选)
 
-            //https://github.com/greenrobot/greenDAO  数据库
-
             "update"         :  'com.qianwen:update-app:3.5.2' ,//更新app
 
             //腾讯bugly

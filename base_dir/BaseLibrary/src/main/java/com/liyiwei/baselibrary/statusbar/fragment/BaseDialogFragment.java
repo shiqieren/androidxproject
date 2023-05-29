@@ -9,20 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.gyf.immersionbar.ImmersionBar;
 import com.liyiwei.baselibrary.R;
 import com.liyiwei.baselibrary.util.apputil.AppManager;
-import com.liyiwei.baselibrary.util.xutils.Utils;
 
-import org.greenrobot.greendao.annotation.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

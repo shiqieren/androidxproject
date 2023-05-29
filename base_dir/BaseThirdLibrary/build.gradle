@@ -4,8 +4,6 @@ if (rootProject.ext.isThirdLibApplication) {
 } else {
     apply plugin: 'com.android.library'
 }
-
-apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -180,14 +178,6 @@ android {
 
 }
 
-greendao {
-    schemaVersion 5//数据库版本号
-    daoPackage 'com.liyiwei.basethirdlib.dbgreendao.greendao'//设置DaoMaster、DaoSession、Dao包名
-    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
-    //targetGenDirTest：设置生成单元测试目录
-    //generateTests：设置自动生成单元测试用例
-}
-
 def buildTime() {
     def date = new Date()
     def formattedDate = date.format("yyyy-MM-dd")
@@ -210,7 +200,6 @@ dependencies {
     implementation project(':baselibrary')
 //    annotationProcessor rootProject.ext.dependencies["router-compiler"]
 //    数据库
-    implementation 'org.greenrobot:greendao:3.2.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
 
 

@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base_dir/BaseLibrary" />
+            <option value="$PROJECT_DIR$/base_dir/BaseResource" />
+            <option value="$PROJECT_DIR$/base_dir/BaseThirdLibrary" />
+            <option value="$PROJECT_DIR$/baseexector_dir/AsynCallback" />
+            <option value="$PROJECT_DIR$/baseexector_dir/BaseMVPmode" />
+            <option value="$PROJECT_DIR$/baseexector_dir/BaseNetWork" />
+            <option value="$PROJECT_DIR$/baseexector_dir/BaseRoute" />
+            <option value="$PROJECT_DIR$/baseexector_dir/CustomLibrary" />
+            <option value="$PROJECT_DIR$/baseexector_dir/LiveDataBus" />
+            <option value="$PROJECT_DIR$/moudulexample" />
+          </set>
+        </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

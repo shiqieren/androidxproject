@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-//使用greendao
-apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -54,13 +52,6 @@ android {
     }
 
 }
-//greendao配置
-greendao {
-    //版本号，升级时可配置
-    schemaVersion 1
-    daoPackage 'com.xxx.ooo.greendaodemo.greendao'
-    targetGenDir 'src/main/java'
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -78,10 +69,9 @@ dependencies {
     // 基础依赖包，必须要依赖-沉浸式
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 
-    implementation 'org.greenrobot:greendao:3.2.2'
-
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["glide-compiler"]
+    implementation 'org.jetbrains:annotations:15.0'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
